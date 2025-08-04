@@ -3,7 +3,7 @@
 
      const handleVerification = async (response) => {
       const res = await fetch(
-        "http://localhost:3000/api/payment/verify-payment",
+        "https://minimal-ecommerce-backend.onrender.com/api/payment/verify-payment",
         {
           method: "POST",
           headers: {
@@ -24,7 +24,7 @@
 
 
     const response = await fetch(
-      "http://localhost:3000/api/payment/create-order",
+      "https://minimal-ecommerce-backend.onrender.com/api/payment/create-order",
       {
         method: "POST",
         headers: {
