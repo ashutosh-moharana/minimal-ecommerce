@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+.env
+.env.*     # For .env.production, .env.development etc
+package-lock.json
+
+# Logs
+*.log
+
+# Vite build output
+frontend/dist/
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
