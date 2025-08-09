@@ -33,12 +33,12 @@ const Home = () => {
 
       {/* Image  */}
       <div className=" absolute translate-y-14  md:block md:ml-66 z-3 mt-4 md:mt-4 hover:rotate-6 hover:scale-125 transition-all duration-500  ">
-        <img src="/image.png" alt="" className=" w-60  md:w-96   scale-150 " />
+        <img src="/image.webp" alt="" className=" w-60  md:w-96   scale-150 " />
       </div>
 
       {/* Bottom Image */}
       <div className="absolute hidden md:block bottom-0 right-0  z-0 mt-4  brightness-50 md:scale-200 -rotate-45 translate-1/3 opacity-30">
-        <img src="/image.png" alt="" className="w-96 md:scale-150 " />
+        <img src="/image.webp" alt="" className="w-96 md:scale-150 " />
       </div>
 
       {/* Description Box */}
