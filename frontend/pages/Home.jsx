@@ -6,7 +6,7 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   async function fetchData(){
-    const data = await fetch('http://localhost:3000')
+    const data = await fetch('https://minimal-ecommerce-backend.onrender.com')
   }
   
   useEffect(()=>{
