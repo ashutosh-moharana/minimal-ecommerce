@@ -1,12 +1,32 @@
 import handlePayment from "../src/handlePayment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
   async function fetchData(){
     const data = await fetch('http://localhost:3000')
   }
- useEffect(()=>{
-  fetchData();
- },[])
+  
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  const handlePaymentClick = async () => {
+    setIsClicked(true);
+    setIsLoading(true);
+    
+    try {
+      await handlePayment();
+    } catch (error) {
+      console.error('Payment error:', error);
+    } finally {
+      setIsLoading(false);
+      // Reset click animation after a short delay
+      setTimeout(() => setIsClicked(false), 200);
+    }
+  };
   
   return (
     <div className="min-h-screen  bg-[#0C091D] text-white p-4 flex flex-col md:flex-row  md:justify-normal items-center overflow-hidden relative">
@@ -53,10 +73,30 @@ const Home = () => {
           Laptop, TV Box, Android Mobile Phones, 6.5 ft USB Cable
         </p>
         <button
-          className="p-4 rounded-full w-full mt-5 backdrop-blur-2xl bg-blue-700 text-[25px] font-bold hover:scale-95 transition-transform duration-200  transform origin-center"
-          onClick={handlePayment}
+          className={`p-4 rounded-full w-full mt-5 backdrop-blur-2xl bg-blue-700 text-[25px] font-bold transition-all duration-300 transform origin-center relative overflow-hidden ${
+            isClicked 
+              ? 'scale-95 shadow-lg shadow-blue-500/50' 
+              : 'hover:scale-105 hover:shadow-xl hover:shadow-blue-500/30 active:scale-95'
+          } ${isLoading ? 'cursor-not-allowed opacity-80' : 'cursor-pointer'}`}
+          onClick={handlePaymentClick}
+          disabled={isLoading}
         >
-          <span>Buy Now</span>
+          {/* Loading Spinner */}
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-blue-700 rounded-full">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            </div>
+          )}
+          
+          {/* Button Text */}
+          <span className={`transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+            {isLoading ? 'Processing...' : 'Buy Now'}
+          </span>
+          
+          {/* Ripple Effect */}
+          <div className={`absolute inset-0 bg-white/20 rounded-full transform scale-0 transition-transform duration-300 ${
+            isClicked ? 'scale-100' : ''
+          }`}></div>
         </button>
       </div>
       {/* Description Box End */}
